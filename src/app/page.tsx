@@ -1,3 +1,3 @@
 export default function Page() {
-    return <h1>Hello, Next.js!sss</h1>
-  }
+  return <div className="text-red-300 text-2xl">Hello, Next.js!sss</div>
+}
