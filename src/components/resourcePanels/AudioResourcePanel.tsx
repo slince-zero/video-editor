@@ -13,8 +13,7 @@ const AudioResourcePanel = observer(() => {
     if (!file) return
     store.addAudioResource(URL.createObjectURL(file))
   }
-  console.log(store.audios);
-  
+
   return (
     <div>
       <div>image</div>
