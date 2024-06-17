@@ -1,5 +1,6 @@
 import Menu from '@/components/Menu'
 import Resource from '@/components/Resource'
+import TimeLine from '@/components/TimeLine'
 export default function Home() {
   return (
     <div className="flex h-screen w-screen">
@@ -14,7 +15,9 @@ export default function Home() {
           <div className="min-w-[80%]">top-1</div>
           <div>top-2</div>
         </div>
-        <div>bottom</div>
+        <div>
+          <TimeLine />
+        </div>
       </div>
     </div>
   )
