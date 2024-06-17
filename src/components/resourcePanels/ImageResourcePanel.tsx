@@ -3,7 +3,7 @@
 import { StoreContext } from '@/store'
 import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
-
+import ImageResource from '../entity/ImageResource'
 type ImageChooseButton = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   className?: string
@@ -33,8 +33,7 @@ const ImageResourcePanel = observer(() => {
     if (!file) return
     store.addImageResource(URL.createObjectURL(file))
   }
-  console.log(store.images);
-  
+
   return (
     <div>
       <div>image</div>
@@ -43,6 +42,11 @@ const ImageResourcePanel = observer(() => {
         className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold text-center mx-4 py-2 px-4 rounded cursor-pointer"
         onChange={handleFileChange}
       />
+      <div>
+        {store.images.map((image, index) => (
+          <ImageResource key={image} image={image} index={index} />
+        ))}
+      </div>
     </div>
   )
 })
