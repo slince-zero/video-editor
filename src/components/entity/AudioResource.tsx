@@ -4,6 +4,7 @@ import { StoreContext } from '@/store'
 import { observer } from 'mobx-react-lite'
 import { useContext, useRef, useState } from 'react'
 import { formatTimeToMinSec } from '../utils'
+import { AiOutlinePlayCircle } from 'react-icons/ai'
 
 type AudioResourceProps = {
   audio: string
@@ -25,7 +26,10 @@ const AudioResource = observer(({ audio, index }: AudioResourceProps) => {
       >
         add
       </button>
-      <div className='h-[100px]'>
+      <div>
+        <AiOutlinePlayCircle className="text-white w-10 h-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      </div>
+      <div className="h-[100px]">
         <audio
           onLoadedData={() => {
             const audioLength = ref.current?.duration ?? 0
