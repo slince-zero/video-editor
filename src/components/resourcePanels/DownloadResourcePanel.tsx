@@ -3,14 +3,9 @@
 import { StoreContext } from '@/store'
 import { observer } from 'mobx-react-lite'
 import { useContext } from 'react'
-const Resource = observer(() => {
+const DownloadResourcePanel = observer(() => {
   const store = useContext(StoreContext)
-  const selectedMenuOption = store.selectedMenuOption
-  return (
-    <div>
-        
-    </div>
-  )
+  return <div>download</div>
 })
 
-export default Resource
+export default DownloadResourcePanel
