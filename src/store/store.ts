@@ -5,12 +5,18 @@ class Store {
   images: string[]
   videos: string[]
   audios: string[]
+  /**
+   * @description
+   * 播放状态(按钮切换，播放或者暂停)
+   */
+  playing: boolean
 
   constructor() {
     this.selectedMenuOption = 'Video'
     this.images = []
     this.videos = []
     this.audios = []
+    this.playing = false
     makeAutoObservable(this)
   }
 
@@ -40,6 +46,11 @@ class Store {
    */
   addAudioResource(audio: string) {
     this.audios = [...this.audios, audio]
+  }
+
+
+  setPlaying(playing: boolean) {
+    this.playing = playing
   }
 }
 
