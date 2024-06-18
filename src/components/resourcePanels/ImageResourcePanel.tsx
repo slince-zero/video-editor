@@ -4,7 +4,7 @@ import { StoreContext } from '@/store'
 import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
 import ImageResource from '../entity/ImageResource'
-import SharedButton from '../utils/SharedButton'
+import SharedButton from '../../utils/SharedButton'
 
 const ImageResourcePanel = observer(() => {
   const store = useContext(StoreContext)

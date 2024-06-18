@@ -3,7 +3,7 @@
 import { StoreContext } from '@/store'
 import { observer } from 'mobx-react-lite'
 import { useContext, useRef, useState } from 'react'
-import { formatTimeToMinSec } from '../utils'
+import { formatTimeToMinSec } from '../../utils'
 import { AiOutlinePlayCircle } from 'react-icons/ai'
 
 type AudioResourceProps = {

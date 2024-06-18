@@ -4,7 +4,7 @@ import { StoreContext } from '@/store'
 import { observer } from 'mobx-react-lite'
 import { useContext } from 'react'
 import VideoResource from '../entity/VideoResource'
-import SharedButton from '../utils/SharedButton'
+import SharedButton from '../../utils/SharedButton'
 const VideoResourcePanel = observer(() => {
   const store = useContext(StoreContext)
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
