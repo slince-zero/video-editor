@@ -11,12 +11,19 @@ class Store {
    */
   playing: boolean
 
+  /**
+   * @description
+   * 最大时间 30s
+   */
+  maxTime: number
+
   constructor() {
     this.selectedMenuOption = 'Video'
     this.images = []
     this.videos = []
     this.audios = []
     this.playing = false
+    this.maxTime = 30 * 1000
     makeAutoObservable(this)
   }
 
@@ -47,7 +54,6 @@ class Store {
   addAudioResource(audio: string) {
     this.audios = [...this.audios, audio]
   }
-
 
   setPlaying(playing: boolean) {
     this.playing = playing

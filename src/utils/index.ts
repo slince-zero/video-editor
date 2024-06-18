@@ -18,3 +18,13 @@ export function formatTimeToMinSec(time: number) {
   const seconds = Math.floor(time % 60)
   return `${minutes}:${appendZero(seconds, 2)}`
 }
+
+/**
+ *
+ * @param time 毫秒数
+ * @description  例如，如果 time = 125，mili = 5，appendZero(5, 2) 返回 '05'，因此最终返回 0:05
+ */
+export function formatTimeToMinSecMili(time: number) {
+  const mili = Math.floor((time % 1000) / 10)
+  return formatTimeToMinSec(time / 1000) + `.${appendZero(mili, 2)}`
+}
