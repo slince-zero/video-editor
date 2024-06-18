@@ -5,6 +5,7 @@ import { StoreContext } from '@/store'
 import { useContext } from 'react'
 import { MdPlayArrow, MdPause } from 'react-icons/md'
 import { formatTimeToMinSecMili } from '@/utils'
+import ScaleLine from './ScaleLine'
 const Player = observer(() => {
   const store = useContext(StoreContext)
   // const formattedTime = formatTimeToMinSecMili(store.currentTime)
@@ -26,6 +27,7 @@ const Player = observer(() => {
         <div className="w-[1px] h-[25px] bg-slate-300 mx-[10px]"></div>
         <span className="font-mono">{formattedMaxTime}</span>
       </div>
+      <ScaleLine />
     </div>
   )
 })
