@@ -15,7 +15,7 @@ const SharedButton = (props: ImageChooseButton) => {
         id="fileInput"
         type="file"
         accept={props.accept}
-        className="hidden"
+        style={{ display: 'none' }}
         onChange={props.onChange}
       />
       Upload
