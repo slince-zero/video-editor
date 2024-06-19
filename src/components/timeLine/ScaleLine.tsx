@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useMemo } from 'react'
 
 type ScaleVerticalLine = {
   interval: number
@@ -21,21 +21,26 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
   /**
    * @description
    * 时间轴上的刻度线
+   * useMemo 优化,只会在组件首次渲染时执行一次，用到useMemo是因为useEffect的依赖项中有ScaleVerticalLine
+   * 所以为了避免重复渲染，用到useMemo
    */
-  const ScaleVerticalLine: ScaleVerticalLine[] = [
-    {
-      interval: 5000,
-      color: 'black',
-      size: 16,
-      width: 1,
-    },
-    {
-      interval: 1000,
-      color: 'black',
-      size: 8,
-      width: 1,
-    },
-  ]
+  const ScaleVerticalLine: ScaleVerticalLine[] = useMemo(
+    () => [
+      {
+        interval: 5000,
+        color: 'black',
+        size: 16,
+        width: 1,
+      },
+      {
+        interval: 1000,
+        color: 'black',
+        size: 8,
+        width: 1,
+      },
+    ],
+    []
+  )
 
   useEffect(() => {
     // 获取 canvas 元素
@@ -59,8 +64,8 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
           // 开始新的绘图路径
           ctx.beginPath()
           for (let i = 0; i < max; i += item.interval) {
-            console.log(i);
-            
+            console.log(i)
+
             // 绘制直线 moveTo() 和 lineTo() 配合使用
             // 从当前位置开始绘制直线到指定的坐标。
             const x = (i / max) * canvasSize.width
@@ -71,7 +76,7 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
         })
       }
     }
-  }, [])
+  }, [max, canvasSize, ScaleVerticalLine])
 
   return (
     <div className="w-full h-[1px] bg-slate-300">
