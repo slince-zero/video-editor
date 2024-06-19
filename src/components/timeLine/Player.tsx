@@ -27,7 +27,7 @@ const Player = observer(() => {
         <div className="w-[1px] h-[25px] bg-slate-300 mx-[10px]"></div>
         <span className="font-mono">{formattedMaxTime}</span>
       </div>
-      <ScaleLine />
+      <ScaleLine max={store.maxTime} />
     </div>
   )
 })
