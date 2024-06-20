@@ -15,7 +15,7 @@ type ScaleLineProps = {
 
 const ScaleLine: React.FC<ScaleLineProps> = (props) => {
   const { max } = props
-  const [canvasSize, setCanvasSize] = useState({ width: 500, height: 30 })
+  const [canvasSize, setCanvasSize] = useState({ width: 50, height: 30 })
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   /**
@@ -43,6 +43,25 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
   )
 
   useEffect(() => {
+    // 动态设置 canvas 大小
+    const handleResize = () => {
+      if (canvasRef.current) {
+        setCanvasSize({
+          width: canvasRef.current.parentElement?.clientWidth ?? 50,
+          height: canvasRef.current.parentElement?.clientHeight ?? 30,
+        })
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    handleResize() // 初始化调用
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
     // 获取 canvas 元素
     const canvas = canvasRef.current
     if (canvas) {
@@ -52,7 +71,6 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
 
       // getContext('2d') 获取 2D 绘图上下文，用于在 canvas 上绘图。
       const ctx = canvas.getContext('2d')
-      // console.log(ctx);
 
       if (ctx) {
         ctx.fillStyle = 'white'
@@ -64,8 +82,6 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
           // 开始新的绘图路径
           ctx.beginPath()
           for (let i = 0; i < max; i += item.interval) {
-            console.log(i)
-
             // 绘制直线 moveTo() 和 lineTo() 配合使用
             // 从当前位置开始绘制直线到指定的坐标。
             const x = (i / max) * canvasSize.width
@@ -79,7 +95,7 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
   }, [max, canvasSize, ScaleVerticalLine])
 
   return (
-    <div className="w-full h-[1px] bg-slate-300">
+    <div className="relative w-full bg-slate-300">
       <canvas ref={canvasRef}></canvas>
     </div>
   )
