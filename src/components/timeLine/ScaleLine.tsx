@@ -94,9 +94,30 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
     }
   }, [max, canvasSize, ScaleVerticalLine])
 
+  const updateFormMouseEvent = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    const rect = canvasRef.current?.getBoundingClientRect()
+    if (rect) {
+      const x = e.clientX - rect.left
+      const value = (x / canvasSize.width) * max
+      const normalizedValue = Math.min(max, Math.max(0, value))
+      // onChange(normalizedValue)
+    }
+  }
+
   return (
     <div className="relative w-full bg-slate-300">
       <canvas ref={canvasRef}></canvas>
+      <div
+        className="rounded-full bg-black w-[4px] absolute top-0 left-0"
+        style={{
+          height: `${canvasSize.height}px`,
+          // transform: `translateX(${
+          //   (value / max) * canvasSize.width
+          // }px) translateX(-2px)`,
+        }}
+      ></div>
     </div>
   )
 }
