@@ -64,8 +64,6 @@ const ScaleLine: React.FC<ScaleLineProps> = (props) => {
           // 开始新的绘图路径
           ctx.beginPath()
           for (let i = 0; i < max; i += item.interval) {
-            console.log(i)
-
             // 绘制直线 moveTo() 和 lineTo() 配合使用
             // 从当前位置开始绘制直线到指定的坐标。
             const x = (i / max) * canvasSize.width
