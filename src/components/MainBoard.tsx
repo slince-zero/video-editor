@@ -44,7 +44,7 @@ const MainBoard = () => {
       </div>
       <div className='flex flex-col flex-1 bg-blue-100'>
         <div className='flex w-full min-h-[50%]'>
-          <div className='min-w-[80%]'>
+          <div className='min-w-[80%] flex justify-center items-center'>
             <canvas id='canvas'></canvas>
           </div>
           <div>top-2</div>
