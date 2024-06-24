@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { MenuOption } from '@/type'
+import { MenuOption, EditorElement } from '@/type'
 class Store {
   selectedMenuOption: MenuOption
   images: string[]
@@ -17,6 +17,18 @@ class Store {
    */
   maxTime: number
 
+  /**
+   * @description
+   * 选中的对象类型，视频、音频、图片、文本
+   */
+  selectedElement: EditorElement | null
+
+  /**
+   * @description
+   * canvas 对象
+   */
+  canvas: fabric.Canvas | null
+
   constructor() {
     this.selectedMenuOption = 'Video'
     this.images = []
@@ -24,6 +36,8 @@ class Store {
     this.audios = []
     this.playing = false
     this.maxTime = 30 * 1000
+    this.selectedElement = null
+    this.canvas = null
     makeAutoObservable(this)
   }
 
@@ -58,6 +72,41 @@ class Store {
   setPlaying(playing: boolean) {
     this.playing = playing
   }
+
+  /**
+   * @description
+   * 设置当前选中的元素，并在画布上更新相应的选中状态
+   */
+  setSelectedElement(selectedElement: EditorElement | null) {
+    this.selectedElement = selectedElement
+    if (this.canvas) {
+      if (selectedElement?.fabricObject) {
+        // 如果存在 fabric 对象，则设置选中的 fabric 对象
+        this.canvas.setActiveObject(selectedElement.fabricObject)
+      } else {
+        // 如果不存在，则取消画布上选中对象的状态
+        this.canvas.discardActiveObject()
+      }
+    }
+  }
+
+  /**
+   * @description
+   * 设置 canvas 对象 
+   */
+  setCanvas(canvas:fabric.Canvas | null){
+    this.canvas = canvas
+    // if(canvas){
+    //   canvas.backgroundColor = this.backgroundColor
+    // }
+  }
+
+
+
+
+
+
+  
 }
 
 export default Store
