@@ -1,4 +1,4 @@
-import MainBoard from "@/components/MainBoard" 
+import MainBoard from '@/components/MainBoard'
 export default function Home() {
-  return <MainBoard/>
+  return <MainBoard />
 }
