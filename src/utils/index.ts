@@ -28,3 +28,28 @@ export function formatTimeToMinSecMili(time: number) {
   const mili = Math.floor((time % 1000) / 10)
   return formatTimeToMinSec(time / 1000) + `.${appendZero(mili, 2)}`
 }
+
+/**
+ * @description
+ * 获取随机id，返回一个长度为 7 的字符串
+ */
+export function getUid() {
+  // 使用基数36，这意味着字符串可能包含数字0-9和字母a-z。
+  return Math.random().toString(36).substring(2, 9)
+}
+
+/**
+ * @description
+ * 类型保护函数,检查是否是 video 类型，如果函数返回 true，则 element 被推断为 HTMLVideoElement类型
+ */
+export function isHtmlVideoElement(
+  element:
+    | HTMLVideoElement
+    | HTMLImageElement
+    | HTMLCanvasElement
+    | null
+    | HTMLElement
+): element is HTMLVideoElement {
+  if (!element) return false
+  return element.tagName === 'VIDEO'
+}

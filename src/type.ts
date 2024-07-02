@@ -21,8 +21,23 @@ type EditorElementBase<T extends string, P> = {
   name: string
   // 必须是字符串类型
   readonly type: T
+  placement: Placement
   // 元素的属性集合
   properties: P
+}
+
+/**
+ * @description
+ * 视频、图片等渲染到编辑区域上时候的位置宽度等属性类型
+ */
+export type Placement = {
+  x: number
+  y: number
+  width: number
+  height: number
+  rotation: number
+  scaleX: number
+  scaleY: number
 }
 
 /**
