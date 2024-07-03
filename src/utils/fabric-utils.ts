@@ -4,7 +4,7 @@ import { fabric } from 'fabric'
  * @description
  * 它是 fabric.Image 类的扩展，用于在 Fabric.js 画布上渲染视频元素，同时支持裁剪和自定义滤镜
  */
-const CoverVideo = fabric.util.createClass(fabric.Image, {
+export const CoverVideo = fabric.util.createClass(fabric.Image, {
   type: 'coverVideo', // 指定对象类型为 coverVideo
   customFilter: 'none', // 自定义滤镜的默认值为 none
   disableCrop: false, // 是否禁用裁剪功能，默认是 false
@@ -57,7 +57,7 @@ const CoverVideo = fabric.util.createClass(fabric.Image, {
       cropX: x,
       cropY: y,
       cropWidth: newWidth,
-      cropHeght: newHeight,
+      cropHeight: newHeight,
     }
   },
 
@@ -105,3 +105,5 @@ declare module 'fabric' {
     }
   }
 }
+
+fabric.CoverVideo = CoverVideo

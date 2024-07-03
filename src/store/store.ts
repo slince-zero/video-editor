@@ -55,9 +55,10 @@ class Store {
    *
    */
   updateSelectedElement() {
-    this.selectedElement = this.editorElements.find(
-      (element) => element.id === this.selectedElement?.id
-    ) ?? null
+    this.selectedElement =
+      this.editorElements.find(
+        (element) => element.id === this.selectedElement?.id
+      ) ?? null
   }
 
   /**
@@ -211,14 +212,16 @@ class Store {
           // if (document.getElementById(element.properties.elementId) == null) {
           //   continue
           // }
-          debugger
+          // debugger
           const videoElement = document.getElementById(
             element.properties.elementId
           )
           console.log(videoElement, 'ssaa')
 
           if (!isHtmlVideoElement(videoElement)) continue
+          console.log(typeof fabric.CoverVideo, 'diing')
 
+          debugger
           const videoObject = new fabric.CoverVideo(videoElement, {
             name: element.id,
             left: element.placement.x,
