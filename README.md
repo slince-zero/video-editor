@@ -37,7 +37,6 @@ Warning: Extra attributes from the server: class at html at RootLayout (Server) 
 装饰器支持：支持 `ES6+` 的装饰器语法，使得类组件状态管理和反应更加简洁。
 多功能性：拥有更丰富的 API，如 `Provider、inject、observer` 等，提供了更加多样化的状态管理方式。
 
-
 ### 4.关于 ‘跳转’ 的一些思考
 
 首先，我不知道 ‘跳转’ 这种说法是不是合理，比如我点击了 `Menu` `组件里的‘Audio’模块的时候，Resource` 组件中会有对应页面的显示。
@@ -50,3 +49,61 @@ ok，以前我认为是 `Menu` 改变了这种行为，首先这种想法是没�
 
 站在用户的角度去看我们开发的应用，看起来是很完整的，但是作为开发者，比如开发一个网页应用，所有的视图，都可以看成一个块一个块，也就是是一个组件，每个组件都是一个状态，每个状态都是一个变量。每个组件会根据这个变量的变化，做出相应的变化。
 
+### 5. 在 Fabric.js 中扩展类时，出现 TypeError: fabric**WEBPACK_IMPORTED_MODULE_1**.fabric.CoverVideo is not a constructor
+
+1. 类的注册问题：
+   确保在扩展 fabric.Image 类并创建 CoverVideo 类时，正确地注册了类。
+
+```ts
+// 定义 CoverVideo 类
+export const CoverVideo = fabric.util.createClass(fabric.Image, {
+    ...
+});
+
+// 注册类到 fabric 上
+fabric.CoverVideo = CoverVideo;
+
+```
+
+2. TypeScript 类型定义问题：
+   确保 TypeScript 定义文件中正确声明了扩展类。
+
+```ts
+declare module 'fabric' {
+  namespace fabric {
+    class CoverVideo extends Image {
+      type: 'coverVideo'
+      customFilter: string
+      disableCrop: boolean
+      cropWidth: number
+      cropHeight: number
+
+      // 这个constructor方法是必须的
+      constructor(element: HTMLVideoElement, options: any)
+      getCrop(
+        image: { width: number; height: number },
+        size: { width: number; height: number }
+      ): {
+        cropX: number
+        cropY: number
+        cropWidth: number
+        cropHeight: number
+      }
+    }
+  }
+}
+```
+
+3. 模块导出和引入问题：
+   确保模块的导出和引入方式正确。
+
+```ts
+import { fabric } from 'fabric'
+
+// 使用 CoverVideo 类
+const videoElement = document.createElement('video')
+const coverVideo = new fabric.CoverVideo(videoElement, {
+  width: 100,
+  height: 100,
+})
+```
