@@ -107,3 +107,10 @@ const coverVideo = new fabric.CoverVideo(videoElement, {
   height: 100,
 })
 ```
+
+关于这个资源渲染到 canvas 上，卡了我很长时间，这期间一直在找问题出在哪，到最后还是发现关于这个问题，就是在 fabric.js 中出现了 TypeError: fabric**WEBPACK_IMPORTED_MODULE_1**.fabric.CoverVideo is not a constructor。所以根据这个仔细去筛问题，既然 ‘is not a constructor’，那么问题
+就一定出在构造器上，最后就发现 `constructor(element: HTMLVideoElement, options: any)` 只要有了这行代码，基本也就能够解决了问题。
+
+chatgpt 给出的回答是：
+
+    在 TypeScript 中，为类声明构造函数不仅是为了类型检查和代码补全，还可以提高代码的可维护性和可读性。通过明确构造函数的参数类型，可以避免许多潜在的错误，并提高开发效率。这就是为什么添加 constructor(element: HTMLVideoElement, options: any); 这一行代码解决了你的问题。
