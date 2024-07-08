@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { MenuOption, EditorElement, Placement } from '@/type'
 import { getUid, isHtmlVideoElement } from '@/utils'
 import { fabric } from 'fabric'
+import { CoverVideo } from '@/utils/fabric-utils'
 class Store {
   selectedMenuOption: MenuOption
   images: string[]
@@ -220,6 +221,7 @@ class Store {
 
           if (!isHtmlVideoElement(videoElement)) continue
           console.log(typeof fabric.CoverVideo, 'diing')
+          console.log(CoverVideo, 'coverVideo')
 
           debugger
           const videoObject = new fabric.CoverVideo(videoElement, {

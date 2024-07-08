@@ -102,6 +102,8 @@ declare module 'fabric' {
       disableCrop: boolean
       cropWidth: number
       cropHeight: number
+
+      constructor(element: HTMLVideoElement, options: any)
     }
   }
 }
